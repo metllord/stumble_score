@@ -6,29 +6,35 @@ require "json"
 module StumbleScore
 
   class Location
-    GOOGLE_KEY    = "AIzaSyCTPREzeJUXKz4-aQOH-CbnNqtcl9DzDlA"
+    GOOGLE_KEY    = "AIzaSyBBguetr1vq8s2LLvZNzm4M57YGYk_uzNc"
     RADIUS        = 2000 # (meters)
     CRITERIA      = URI.escape("bar|pub")
     MAGIC_NUMBER  = 20
 
     def initialize(address)
-      # TODO
+        @address = address
     end
 
     def bar_count
-      # TODO
+      self.bars.length
     end
 
     def score
-      0
+      self.bars.length * 5.0 
     end
 
     def classification
-      # TODO
+      if self.score < 50.0
+        "Dry"
+      elsif self.score >= 50.0 and self.score < 100
+        "Tipsy"
+      else
+        "Sloppy"
+      end
     end
 
     def bar_names
-      # TODO
+      for each 
     end
 
     def bars
@@ -63,6 +69,7 @@ module StumbleScore
       session              = Net::HTTP.new(uri.host, uri.port)
       session.use_ssl      = true
       session.verify_mode  = OpenSSL::SSL::VERIFY_NONE
+      #session.set_debug_output($stdout)
       request              = Net::HTTP::Get.new(uri.request_uri)
       response             = session.request(request)
       json                 = response.body
