@@ -34,7 +34,11 @@ module StumbleScore
     end
 
     def bar_names
-      for each 
+       output = Array.new()
+       self.bars.each do |place|
+        output.push(place['name'])
+      end
+       output  
     end
 
     def bars

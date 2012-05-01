@@ -10,6 +10,7 @@ class CLI
          "Bar count: #{location.bar_count}"
          "StumbleScore: #{location.score}"
          "Classified as: #{location.classification}"
+         location.bar_names.class
     else
         "usage: Enter an address after the command."
         "EX: stumblescore 19078"
