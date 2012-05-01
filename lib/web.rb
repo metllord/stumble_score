@@ -19,6 +19,10 @@ get '/' do
   	location.bar_names.each do |place|
   		message = message + "<li>#{place}</li>"
   	end
+  	message = message + "</ul><p>Be safe, here's some local cabs:</p><ul>"
+  	location.cabs.each do |place|
+  		message = message + "<li>#{place}</li>"
+  	end
   	message = message + "</ul>"
   else
   	message = '<!doctype html>

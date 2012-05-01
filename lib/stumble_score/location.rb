@@ -41,13 +41,20 @@ module StumbleScore
        output  
     end
 
+    def cabs
+       output = Array.new()
+       self.designated_driver.each do |driver|
+       output.push(driver['name'])
+      end
+       output 
+     end
     def bars
       uri = URI::HTTPS.build({
         :host  => "maps.googleapis.com",
         :path  => "/maps/api/place/search/json",
         :query => "location=#{self.geocode}&" \
                   "radius=#{RADIUS}&" \
-                  "keyword=#{CRITERIA}&" \
+                  "keyword=#{URI.escape('bar|pub')}&" \
                   "sensor=false&" \
                   "key=#{GOOGLE_KEY}"
       })
@@ -55,6 +62,19 @@ module StumbleScore
       parsed["results"]
     end
 
+    def designated_driver
+         uri = URI::HTTPS.build({
+        :host  => "maps.googleapis.com",
+        :path  => "/maps/api/place/search/json",
+        :query => "location=#{self.geocode}&" \
+                  "radius=#{RADIUS}&" \
+                  "keyword=#{URI.escape('taxi|cab')}&" \
+                  "sensor=false&" \
+                  "key=#{GOOGLE_KEY}"
+      })
+      parsed = self.ask_the_google(uri)
+      parsed["results"]
+    end
     def geocode
       raise "@address instance variable not set!" unless @address
       escaped_address = URI.escape(@address)
