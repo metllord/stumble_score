@@ -45,6 +45,6 @@ Visit [http://localhost:4567/?address=rittenhouse%20square,%20pa](http://localho
 7. `heroku login`
 8. `heroku create --stack cedar`
 9. `git push heroku master`
-10. Visit goofy URL
+10. Visit http://afternoon-planet-3812.herokuapp.com/
 11. Profit
 
