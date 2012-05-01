@@ -19,10 +19,18 @@ get '/' do
   	location.bar_names.each do |place|
   		message = message + "<li>#{place}</li>"
   	end
-  	message = message + "</ul></body></head>"
+  	message = message + "</ul>"
   else
-  	message = "<p>Please specify an address parameter to search.</p>"
+  	message = '<!doctype html>
+  <html>
+  <head></head>
+  <body>
+    <h1>Welcome to StumbleScore</h1><p>Please specify an address parameter to search.</p>
+    <form>
+    <input type="text" name="address">
+    <input type="submit" value="Submit" />
+    </form>'
   end
-  message
+  message+ "</body></head>"
 end
 
